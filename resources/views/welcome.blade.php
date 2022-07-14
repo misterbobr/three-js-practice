@@ -8,7 +8,7 @@
         @vite(['resources\js\three.js', 'resources\css\app.css'])
     </head>
     <body>
-        <h1>SAMPLE text</h1>
+        <!-- <h1>SAMPLE text</h1> -->
         <!-- <canvas class="webgl"></canvas> -->
         <!-- <script src="js/three.js"></script> -->
     </body>

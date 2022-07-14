@@ -5,6 +5,8 @@ import gsap from 'gsap';
 
 const sizes = { width: window.innerWidth, height: window.innerHeight };
 
+const gui = new dat.GUI();
+
 const scene = new THREE.Scene();
 
 window.addEventListener('resize', () => {
@@ -23,42 +25,61 @@ camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 3;
 scene.add(camera);
+const camFolder = gui.addFolder('cam');
+camFolder.add(camera.position, 'x').min(-10).max(10);
+camFolder.add(camera.position, 'y').min(-10).max(10);
+camFolder.add(camera.position, 'z').min(-10).max(10);
 
 // const canvas = document.querySelector("canvas.webgl");
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.gammaOutput = true;
 document.body.appendChild(renderer.domElement);
-let text = document.createElement('h1');
-text.innerText = "Sample text";
-document.body.appendChild(text);
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+const loader = new GLTFLoader();
+loader.load( 'assets/models/basketball.gltf', function (gltf) {
 
-const material = new THREE.MeshStandardMaterial();
-material.metalness = 0.7;
-material.roughness = 0.2;
-material.color = new THREE.Color(0x666666);
+	scene.add( gltf.scene );
+	console.log(gltf);
 
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+	gui.add(gltf.scene.rotation, 'x').min(0).max(9);
+	gui.add(gltf.scene.rotation, 'y').min(0).max(9);
+	gui.add(gltf.scene.rotation, 'z').min(0).max(9);
 
-const light1 = new THREE.PointLight(0xbb2244, 1);
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
+// let text = document.createElement('h1');
+// text.innerText = "Sample text";
+// document.body.appendChild(text);
+
+// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+// const material = new THREE.MeshStandardMaterial();
+// material.metalness = 0.7;
+// material.roughness = 0.2;
+// material.color = new THREE.Color(0x666666);
+
+// const cube = new THREE.Mesh( geometry, material );
+// scene.add( cube );
+
+const light1 = new THREE.DirectionalLight(0xffffff, 1);
 light1.position.x = 2;
-light1.position.y = 3;
-light1.position.z = 4;
+light1.position.y = 2;
+light1.position.z = 10;
 scene.add(light1);
 
-const light2 = new THREE.PointLight(0x0066aa, 1);
-light2.position.x = -2;
-light2.position.y = -3;
-light2.position.z = 4;
-scene.add(light2);
+// renderer.render( scene, camera );
 
 function animate() {
 	requestAnimationFrame( animate );
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    // cube.rotation.x += 0.01;
+    // cube.rotation.y += 0.01;
 	renderer.render( scene, camera );
 }
 animate();
