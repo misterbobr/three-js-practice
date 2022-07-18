@@ -78,7 +78,7 @@ section#login-section {
     position: absolute;
     z-index: 100;
     width: 26%;
-    height: 25%;
+    height: 32%;
     top: 30%;
     left: 37%;
     background-color: #ccccccee;
@@ -97,7 +97,7 @@ section#login-section {
     position: absolute;
     z-index: 100;
     width: 26%;
-    height: 30%;
+    height: 45%;
     top: 30%;
     left: 37%;
     background-color: #ccccccee;
@@ -135,4 +135,8 @@ section#login-section {
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   opacity: 1;
+}
+
+form {
+    margin: 1rem;
 }

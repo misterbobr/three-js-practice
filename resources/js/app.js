@@ -1,5 +1,15 @@
 import { delay } from 'lodash';
-import './bootstrap'
+import { createScene } from './three';
+
+async function isLogged() {
+    let response = await fetch(`${window.origin}/isLogged`, {
+        method: "GET"
+    }).then((res) => {
+        return res.json();
+    });
+    response = await response['result'];
+    return response;
+}
 
 function hideWindow(element) {
     if (element.style.opacity >= 1)
@@ -63,19 +73,22 @@ function fadeIn(el) {
 	
 }
 
-const loginWindow = document.querySelector('div.login-window');
-const registerWindow = document.querySelector('div.register-window');
-const loginButton = document.querySelector('#login-button');
-const registerButton = document.querySelector('#register-button');
-
-const closeBtns = document.querySelectorAll('.btn-close');
-closeBtns.forEach(btn => btn.onclick = ()=>{
-    hideWindow(btn.parentElement);
-});
-
-loginButton.onclick = ()=>{
-    toggleLoginWindow(loginWindow);
+if (!isLogged()) {
+	const loginWindow = document.querySelector('div.login-window');
+	const registerWindow = document.querySelector('div.register-window');
+	const loginButton = document.querySelector('#login-button');
+	const registerButton = document.querySelector('#register-button');
+	const closeBtns = document.querySelectorAll('.btn-close');
+	closeBtns.forEach(btn => btn.onclick = ()=>{
+		hideWindow(btn.parentElement);
+	});
+	
+	loginButton.onclick = ()=>{
+		toggleLoginWindow(loginWindow);
+	}
+	registerButton.onclick = ()=>{
+		toggleLoginWindow(registerWindow);
+	}
 }
-registerButton.onclick = ()=>{
-    toggleLoginWindow(registerWindow);
-}
+
+createScene();
