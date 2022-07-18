@@ -3,6 +3,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as dat from 'dat.gui';
 import gsap from 'gsap';
 import CustomEase from "gsap/CustomEase";
+import { Raycaster } from 'three';
 gsap.registerPlugin(CustomEase);
 
 const head = document.querySelector("section#head");
@@ -39,10 +40,18 @@ scene.add(camera);
 // camFolder.add(camera.position, 'y').min(-10).max(10);
 // camFolder.add(camera.position, 'z').min(-10).max(10);
 
+// const mouse = new THREE.Vector2();
+// window.addEventListener('mousemove', (event) => {
+//     mouse.x = event.clientX / sizes.width * 2 - 1;
+//     mouse.y = -1 * event.clientY / sizes.height * 2 + 1;
+// })
+
+// const raycaster = new THREE.Raycaster();
+
 // const canvas = document.querySelector("canvas.webgl");
 const renderer = new THREE.WebGLRenderer({ alpha: true, canvas: document.querySelector("canvas.webgl") });
 renderer.setClearColor(0xaaaaaa, 0);
-renderer.setSize(sizes.width * 0.99, sizes.height);
+renderer.setSize(sizes.width * 0.995, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.gammaOutput = true;
@@ -63,8 +72,8 @@ loader.load( 'assets/models/basketball.gltf', function (gltf) {
 
     CustomEase.create("myBounce", "M0,0 C0.18,0.432 0.264,0.589 0.348,0.72 0.408,0.814 0.452,0.888 0.544,1 0.604,0.956 0.616,0.926 0.758,0.878 0.874,0.838 0.962,0.836 1,0.836 ");
     // timeline.addPause(5);
-    timeline.fromTo(model.position, {x: -7}, {x: 3.2, duration: 5, ease: "myBounce"}, 2)
-            .fromTo(model.rotation, {z: 1.2}, {z: -9, duration: 5, ease: "myBounce"}, 2)
+    timeline.fromTo(model.position, {x: -7}, {x: 3.23, duration: 5, ease: "myBounce"}, 2)
+            .fromTo(model.rotation, {z: 1.23}, {z: -9, duration: 5, ease: "myBounce"}, 2)
     timeline.fromTo(model.position, {z: -0.5}, {z: 0.5, duration: 5}, '<')
             .fromTo(model.rotation, {x: 0}, {x: 1, duration: 5}, '<')
 
@@ -72,6 +81,16 @@ loader.load( 'assets/models/basketball.gltf', function (gltf) {
         requestAnimationFrame( animate );
         // model.rotation.x += 0.01;
         // model.rotation.y += 0.01;
+        
+        // let objs =
+
+        // raycaster.setFromCamera(mouse, camera);
+        // const intersects = raycaster.intersectObjects(objs);
+        
+        // for ( let i = 0; i < intersects.length; i ++ ) {
+        //     console.log(intersects[i]);
+        // }
+
         renderer.render( scene, camera );
     }
     animate();
@@ -112,8 +131,6 @@ timeline.from(title, {opacity: 0, y:100, duration: 1.5}, 3)
 
 let div_login = document.createElement('div');
 div_login.className = 'login-section';
-// let login = document.createElement('');
-
 
 // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
@@ -128,4 +145,3 @@ div_login.className = 'login-section';
 
 
 // renderer.render( scene, camera );
-
