@@ -29,7 +29,7 @@ function createScene() {
         camera.aspect = sizes.width/sizes.height;
         camera.updateProjectionMatrix()
 
-        renderer.setSize(sizes.width * 0.98, sizes.height);
+        renderer.setSize(sizes.width * 0.995, sizes.height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     })
 
@@ -129,8 +129,8 @@ function createScene() {
 
     timeline.from(title, {opacity: 0, y:100, duration: 1.5}, 3)
             .from(text, {opacity: 0, y:100, duration: 1.5}, '-=0.5')
-            .from(login, {opacity: 0, y:30, duration: 1}, '+=1.5')
-            .from(register, {opacity: 0, y:30, duration: 1}, '-=0.5');
+            .from(login, {opacity: 0, y:30, duration: 1}, 0)//'+=1.5')
+            .from(register, {opacity: 0, y:30, duration: 1}, 0)//'-=0.5');
 
     let div_login = document.createElement('div');
     div_login.className = 'login-section';

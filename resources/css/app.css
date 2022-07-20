@@ -78,7 +78,7 @@ section#login-section {
     position: absolute;
     z-index: 100;
     width: 26%;
-    height: 32%;
+    height: fit-content;
     top: 30%;
     left: 37%;
     background-color: #ccccccee;
@@ -97,7 +97,7 @@ section#login-section {
     position: absolute;
     z-index: 100;
     width: 26%;
-    height: 45%;
+    height: fit-content;
     top: 30%;
     left: 37%;
     background-color: #ccccccee;
@@ -138,5 +138,9 @@ section#login-section {
 }
 
 form {
+    margin: 1rem;
+}
+
+.auth-validation-errors {
     margin: 1rem;
 }

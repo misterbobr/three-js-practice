@@ -17,15 +17,16 @@ function hideWindow(element) {
 }
 
 function showWindow(element) {
-    if (element.style.opacity <= 0.01)
+    if (element.style.display !== 'block')
         fadeIn(element);
 }
 
 function toggleLoginWindow(element) {
     let windows = document.querySelectorAll('.login-window, .register-window');
-    windows.forEach(el => {
+    for (const el of windows.values()) {
+		if (!el.isEqualNode(element))
         hideWindow(el);
-    });
+    };
     showWindow(element);
 }
 
@@ -73,7 +74,8 @@ function fadeIn(el) {
 	
 }
 
-if (!isLogged()) {
+var logged = await isLogged();
+if (!logged) {
 	const loginWindow = document.querySelector('div.login-window');
 	const registerWindow = document.querySelector('div.register-window');
 	const loginButton = document.querySelector('#login-button');

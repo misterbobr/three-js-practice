@@ -20,25 +20,33 @@
                 <h1 id="teambasket">TeamBasket</h1>
                 <p id="description">Ищите людей рядом и играйте в баскетбол вместе.</p>
             </div>
+            <div class="register-window bg-gradient">
+                <button type="button" class="btn-close" aria-label="Close"></button>
+                @yield('register')
+            </div>
+            <div class="login-window bg-gradient">
+                <button type="button" class="btn-close" aria-label="Close"></button>
+                @yield('login')
+            </div>
         </section>
         <!-- <h1>SAMPLE text</h1> -->
         <!-- <canvas class="webgl"></canvas> -->
         <!-- <script src="js/three.js"></script> -->
-        @guest
-            <section id="login-section">
+        <section id="login-section">  
+            @guest
                 <div>
                     <button type="button" class="btn-login" id="login-button">Войти</button><br>
                     <button type="button" class="btn-login" id="register-button">Зарегистрироваться</button>
                 </div>
-                <div class="register-window bg-gradient">
-                    <button type="button" class="btn-close" aria-label="Close"></button>
-                    @yield('register')
+            @endguest
+            @auth
+                <div>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <input type="submit" class="btn-login" id="logout-button" value="Выйти"/>
+                    </form>
                 </div>
-                <div class="login-window bg-gradient">
-                    <button type="button" class="btn-close" aria-label="Close"></button>
-                    @yield('login')
-                </div>
-            </section>
-        @endguest
+            @endauth
+        </section>
     </body>
 </html>
